@@ -1,12 +1,15 @@
 class Solution:
-    def maxVowels(self, s: str, k: int) -> int:
-        vowels = set('aeiou')
-        max_count = 0
-        curr_count = 0
-        for i in range(len(s)):
-            if s[i] in vowels:
-                curr_count += 1
-            if i >= k and s[i - k] in vowels:
-                curr_count -= 1
-            max_count = max(max_count, curr_count)
-        return max_count
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        i = 0
+        j = 0
+        max_length = 0
+        while j < len(nums):
+            if nums[j] == 0:
+                k -= 1
+            while k < 0:
+                if nums[i] == 0:
+                    k += 1
+                i += 1
+            max_length = max(max_length, j - i + 1)
+            j += 1
+        return max_length
